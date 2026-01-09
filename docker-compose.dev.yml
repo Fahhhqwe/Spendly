@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+
+  cilent:
+    build:
+      context: ./client/my-app
+      dockerfile: Dockerfile.client
+    container_name: client
+    command: npm run dev -- -p 4060
+    ports:
+      - "4060:4060"
+    volumes:
+      - ./client/my-app:/app
+      - /app/node_modules
+    env_file:
+      - ./client/my-app/.env
+    
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.server
+    container_name: server
+    command: npm run dev
+    ports:
+      - "4080:4080"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    env_file:
+      - ./server/.env
