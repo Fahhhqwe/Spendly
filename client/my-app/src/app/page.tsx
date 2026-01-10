@@ -28,7 +28,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchExpenses = async () => {
       try {
-        const res = await fetch("http://localhost:4080/api/expenses");
+        const res = await fetch("https://backend-spendly-production.up.railway.app/api/expenses");
         if (!res.ok) throw new Error("Failed to fetch expenses");
         const data: Expense[] = await res.json();
 

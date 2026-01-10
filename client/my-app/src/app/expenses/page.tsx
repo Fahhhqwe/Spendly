@@ -31,7 +31,7 @@ export default function ExpensesPage() {
     useEffect(() => {
         const fetchExpenses = async () => {
             try {
-                const res = await fetch("http://localhost:4080/api/expenses");
+                const res = await fetch("https://backend-spendly-production.up.railway.app/api/expenses");
                 if (!res.ok) throw new Error("Failed to fetch expenses");
                 const data: Expense[] = await res.json();
                 setExpenses(data.filter(e => e.usr_id === 1));
@@ -73,7 +73,7 @@ export default function ExpensesPage() {
         if (!expenseToDelete) return;
 
         try {
-            const res = await fetch(`http://localhost:4080/api/users/1/expenses/${expenseToDelete.exp_id}`, {
+            const res = await fetch(`https://backend-spendly-production.up.railway.app/api/users/1/expenses/${expenseToDelete.exp_id}`, {
                 method: "DELETE",
             });
             if (!res.ok) throw new Error("Failed to delete expense");
@@ -197,13 +197,13 @@ export default function ExpensesPage() {
                             try {
                                 let res;
                                 if (editingExpense) {
-                                    res = await fetch(`http://localhost:4080/api/users/1/expenses/${editingExpense.exp_id}`, {
+                                    res = await fetch(`https://backend-spendly-production.up.railway.app/api/users/1/expenses/${editingExpense.exp_id}`, {
                                         method: "PUT",
                                         headers: { "Content-Type": "application/json" },
                                         body: JSON.stringify(expenseData),
                                     });
                                 } else {
-                                    res = await fetch("http://localhost:4080/api/users/1/expenses", {
+                                    res = await fetch("https://backend-spendly-production.up.railway.app/api/users/1/expenses", {
                                         method: "POST",
                                         headers: { "Content-Type": "application/json" },
                                         body: JSON.stringify(expenseData),
